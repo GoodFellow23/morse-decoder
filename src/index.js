@@ -38,7 +38,43 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    
+    var strLetter='';
+    var strTemp='';
+    var strResult='';
+    
+
+    while(expr!='')
+    {        
+        strLetter=expr.slice(0,10);
+        expr=expr.slice(10);
+        if(strLetter.startsWith('*'))
+        {
+            strResult+=' ';            
+        }
+        else
+        {       
+            while(strLetter.startsWith('0'))
+            {
+                strLetter=strLetter.slice(1);
+            }
+            while(strLetter.startsWith('10') || strLetter.startsWith('11'))
+            {
+                if(strLetter.startsWith('10'))
+                {
+                   strTemp+='.';
+                }
+                else 
+                {                    
+                    strTemp+='-';
+                }
+                strLetter=strLetter.slice(2);
+            } 
+                strResult+=MORSE_TABLE[strTemp];
+                strTemp='';       
+         }             
+    }
+    return strResult;
 }
 
 module.exports = {
